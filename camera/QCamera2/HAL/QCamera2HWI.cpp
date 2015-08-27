@@ -6310,7 +6310,8 @@ int32_t QCamera2HardwareInterface::prepareRawStream(QCameraChannel *curChannel)
             for (uint8_t i = 0; i < pChannel->getNumOfStreams(); i++) {
                 QCameraStream *pStream = pChannel->getStreamByIndex(i);
                 if (pStream != NULL) {
-                    if (pStream->isTypeOf(CAM_STREAM_TYPE_METADATA)) {
+                    if ((pStream->isTypeOf(CAM_STREAM_TYPE_METADATA))
+                            || (pStream->isTypeOf(CAM_STREAM_TYPE_POSTVIEW))) {
                         continue;
                     }
                     pStream->getFrameDimension(str_dim);
@@ -6328,7 +6329,8 @@ int32_t QCamera2HardwareInterface::prepareRawStream(QCameraChannel *curChannel)
     for (uint8_t i = 0; i < curChannel->getNumOfStreams(); i++) {
         QCameraStream *pStream = curChannel->getStreamByIndex(i);
         if (pStream != NULL) {
-            if (pStream->isTypeOf(CAM_STREAM_TYPE_METADATA)) {
+            if ((pStream->isTypeOf(CAM_STREAM_TYPE_METADATA))
+                    || (pStream->isTypeOf(CAM_STREAM_TYPE_POSTVIEW))) {
                 continue;
             }
             pStream->getFrameDimension(str_dim);
