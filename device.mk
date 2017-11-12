@@ -301,7 +301,8 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.rc \
     init.qcom.power.rc \
     loggy.sh \
-    ueventd.qcom.rc
+    ueventd.qcom.rc \
+    init.safailnet.rc
 
 # RCS
 PRODUCT_PACKAGES += \
