@@ -153,6 +153,10 @@ PRODUCT_COPY_FILES +=  \
 PRODUCT_PACKAGES += \
     librmnetctl
 
+# Xiaomi Shit
+PRODUCT_PACKAGES += \
+    XiaomiShit
+
 # Display
 PRODUCT_PACKAGES += \
     gralloc.msm8952 \
