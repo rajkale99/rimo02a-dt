@@ -236,6 +236,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     keystore.msm8952
 
+# SRT Parts
+PRODUCT_PACKAGES += \
+    SRTParts
+
 # Lights
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-impl \
