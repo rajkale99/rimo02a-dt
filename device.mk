@@ -341,7 +341,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     init.qcom.rc \
     init.target.rc \
-    init.rimo02a.usb.rc \
+    init.qcom.usb.rc \
     ueventd.qcom.rc \
     init.safailnet.rc
 
@@ -387,7 +387,7 @@ PRODUCT_COPY_FILES += \
 
 # USB
 PRODUCT_PACKAGES += \
-    com.android.future.usb.accessory
+    android.hardware.usb@1.0-service.basic
 
 # Vendor security patch level
 PRODUCT_PROPERTY_OVERRIDES += \
