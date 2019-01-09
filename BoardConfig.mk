@@ -56,7 +56,7 @@ TARGET_KERNEL_HEADER_ARCH := arm64
 
 TARGET_KERNEL_SOURCE := kernel/smartron/msm8976
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-TARGET_KERNEL_CONFIG := lineageos_rimo02a_defconfig
+TARGET_KERNEL_CONFIG := rk_defconfig
 
 # ANT+
 BOARD_ANT_WIRELESS_DEVICE := "qualcomm-hidl"
@@ -96,6 +96,13 @@ QCOM_BT_USE_SMD_TTY := true
 # This is needed for us as it disables tcache, which is breaking camera.
 MALLOC_SVELTE := true
 BOARD_GLOBAL_CFLAGS += -DDECAY_TIME_DEFAULT=0
+
+# Camera
+USE_DEVICE_SPECIFIC_CAMERA := true
+BOARD_QTI_CAMERA_32BIT_ONLY := true
+TARGET_TS_MAKEUP := true
+TARGET_PROCESS_SDK_VERSION_OVERRIDE := \
+    /system/bin/mm-qcamera-daemon=24
 
 # Charger
 BOARD_CHARGER_DISABLE_INIT_BLANK := true

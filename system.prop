@@ -50,10 +50,12 @@ ro.qualcomm.bt.hci_transport=smd
 sys.vendor.shutdown.waittime=500
 
 # Camera
-camera.lowpower.record.enable=1
-camera.hal1.packagelist=com.skype.raider,com.google.android.talk
-persist.camera.HAL3.enabled=1
-persist.vendor.qti.telephony.vt_cam_interface=1
+camera.lowpower.record.enable=1 
+camera.hal1.packagelist=com.skype.raider,com.google.android.talk,com.whatsapp 
+persist.camera.HAL3.enabled=1 
+persist.vendor.qti.telephony.vt_cam_interface=1 
+vendor.camera.aux.packagelist=org.codeaurora.snapcam,com.android.camera,org.lineageos.snap
+
 
 # Additional buffers shared between Camera and Video
 vidc.enc.dcvs.extra-buff-count=2
