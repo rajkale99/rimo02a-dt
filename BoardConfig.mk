@@ -103,6 +103,12 @@ BOARD_QTI_CAMERA_32BIT_ONLY := true
 TARGET_PROCESS_SDK_VERSION_OVERRIDE := \
     /system/bin/mm-qcamera-daemon=24
 
+MALLOC_SVELTE := true
+BOARD_GLOBAL_CFLAGS += -DDECAY_TIME_DEFAULT=0
+
+TARGET_LD_SHIM_LIBS := \
+    /system/lib/hw/camera.msm8952.so|libshims_camera.so
+
 # Charger
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
 BOARD_CHARGER_ENABLE_SUSPEND := true
