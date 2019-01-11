@@ -108,6 +108,7 @@ BOARD_GLOBAL_CFLAGS += -DDECAY_TIME_DEFAULT=0
 
 TARGET_LD_SHIM_LIBS := \
     /system/lib/hw/camera.msm8952.so|libshims_camera.so
+    /system/lib64/lib-imsvt.so|libshims_ims.so
 
 # Charger
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
