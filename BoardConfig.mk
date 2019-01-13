@@ -93,22 +93,14 @@ BLUETOOTH_HCI_USE_MCT := true
 QCOM_BT_USE_BTNV := true
 QCOM_BT_USE_SMD_TTY := true
 
-# This is needed for us as it disables tcache, which is breaking camera.
-MALLOC_SVELTE := true
-BOARD_GLOBAL_CFLAGS += -DDECAY_TIME_DEFAULT=0
-
 # Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
 BOARD_QTI_CAMERA_32BIT_ONLY := true
 TARGET_PROCESS_SDK_VERSION_OVERRIDE := \
     /system/bin/mm-qcamera-daemon=24
 
-MALLOC_SVELTE := true
-BOARD_GLOBAL_CFLAGS += -DDECAY_TIME_DEFAULT=0
-
-TARGET_LD_SHIM_LIBS := \
-    /system/lib/hw/camera.msm8952.so|libshims_camera.so
-    /system/lib64/lib-imsvt.so|libshims_ims.so
+#MALLOC_SVELTE := true
+#BOARD_GLOBAL_CFLAGS += -DDECAY_TIME_DEFAULT=0
 
 # Charger
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
