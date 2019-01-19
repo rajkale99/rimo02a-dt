@@ -96,11 +96,10 @@ QCOM_BT_USE_SMD_TTY := true
 # Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
 BOARD_QTI_CAMERA_32BIT_ONLY := true
-TARGET_PROCESS_SDK_VERSION_OVERRIDE := \
-    /system/bin/mm-qcamera-daemon=24
 
-#MALLOC_SVELTE := true
-#BOARD_GLOBAL_CFLAGS += -DDECAY_TIME_DEFAULT=0
+# Shim
+TARGET_LD_SHIM_LIBS := \
+    /system/lib/android.hardware.camera.device@3.2.so|/system/lib/libshim_camera.so
 
 # Charger
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
