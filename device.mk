@@ -144,7 +144,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Snap \
     camera.msm8952 \
-    libmm-qcamera \
+    libmm-qcamera
 
 PRODUCT_COPY_FILES +=  \
     $(LOCAL_PATH)/configs/external_camera_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/external_camera_config.xml
@@ -292,7 +292,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     fstab.qcom \
     init.qcom.sh \
-    init.goodix.sh
+    init.goodix.sh \
+    init.rimo.rc
 
 PRODUCT_PACKAGES += \
     init.qcom.rc \
