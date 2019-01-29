@@ -23,12 +23,13 @@ $(call inherit-product, vendor/legion/config/common_full_phone.mk)
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := rimo02a
 PRODUCT_NAME := legion_rimo02a
-PRODUCT_BRAND := smartron
+PRODUCT_BRAND := Smartron
 TARGET DEVICE := rimo02a
+PRODUCT_MANUFACTURER := Smartron
 
 
 TARGET_BOOT_ANIMATION_RES := 1080
-DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
+
 PRODUCT_GMS_CLIENTID_BASE := android-smartron
 
 
