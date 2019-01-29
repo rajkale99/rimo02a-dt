@@ -17,14 +17,15 @@
 # Inherit device configuration
 $(call inherit-product, device/smartron/rimo02a/full_rimo02a.mk)
 
-# Inherit some common ArrowOS stuff.
-$(call inherit-product, vendor/arrow/config/common.mk)
+# Inherit some common Aosp stuff.
+$(call inherit-product, vendor/aosp/common.mk)
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := rimo02a
-PRODUCT_NAME := arrow_rimo02a
-PRODUCT_BRAND := smartron
+PRODUCT_NAME := aosp_rimo02a
+PRODUCT_BRAND := Smartron
 TARGET DEVICE := rimo02a
+PRODUCT_MANUFACTURER := Smartron
 
 PRODUCT_GMS_CLIENTID_BASE := android-smartron
 
