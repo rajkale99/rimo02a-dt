@@ -136,25 +136,18 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES +=  \
     $(LOCAL_PATH)/audio/dax-default.xml:$(TARGET_COPY_OUT_VENDOR)/etc/dolby/dax-default.xml
 
-# Camera
-PRODUCT_PACKAGES += \
-    Snap
-
-ifneq ($(USE_PROPRIETARY_CAMERA),true)
-PRODUCT_PACKAGES += \
-    camera.msm8952 \
-    libqomx_core \
-    libmmcamera_interface \
-    libmmjpeg_interface \
-    libgui_vendor
-endif
-
-PRODUCT_COPY_FILES +=  \
-    $(LOCAL_PATH)/configs/external_camera_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/external_camera_config.xml
-
 # Connectivity Engine support (CNE)
 PRODUCT_PACKAGES += \
     libcnefeatureconfig
+
+# Camera
+PRODUCT_PACKAGES += \
+    Snap \
+    camera.msm8952 \
+    libmm-qcamera \
+
+PRODUCT_COPY_FILES +=  \
+    $(LOCAL_PATH)/configs/external_camera_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/external_camera_config.xml
 
 # Data Services
 PRODUCT_PACKAGES += \

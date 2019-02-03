@@ -497,7 +497,6 @@ static void mm_channel_process_stream_buf(mm_camera_cmdcb_t * cmd_cb,
             }
         }
         if (info.num_nodes > 0) {
-
             /* decrease pending_cnt */
             if (MM_CAMERA_SUPER_BUF_NOTIFY_BURST == notify_mode) {
                 ch_obj->pending_cnt--;
@@ -526,7 +525,7 @@ static void mm_channel_process_stream_buf(mm_camera_cmdcb_t * cmd_cb,
                     ch_obj->isConfigCapture = FALSE;
                 }
 
-                if (ch_obj->isConfigCapture && ch_obj->cur_capture_idx < MAX_CAPTURE_BATCH_NUM) {
+                if (ch_obj->isConfigCapture) {
                     if (ch_obj->frameConfig.configs[ch_obj->cur_capture_idx].num_frames != 0) {
                         ch_obj->frameConfig.configs[ch_obj->cur_capture_idx].num_frames--;
                     } else {
