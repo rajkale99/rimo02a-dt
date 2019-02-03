@@ -17,7 +17,7 @@
 # Inherit device configuration
 $(call inherit-product, device/smartron/rimo02a/full_rimo02a.mk)
 
-# Inherit some common LineageOS stuff.
+# Inherit some common ArrowOS stuff.
 $(call inherit-product, vendor/arrow/config/common.mk)
 
 ## Device identifier. This must come after all inclusions
@@ -26,9 +26,6 @@ PRODUCT_NAME := arrow_rimo02a
 PRODUCT_BRAND := smartron
 TARGET DEVICE := rimo02a
 
-TARGET_BOOT_ANIMATION_RES := 1080
-
-DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 PRODUCT_GMS_CLIENTID_BASE := android-smartron
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
