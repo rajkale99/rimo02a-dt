@@ -243,12 +243,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     keystore.msm8952
 
-# Libshims
-PRODUCT_PACKAGES += \
-    libshims_camera \
-    libshims_ims \
-    libshims_rild_socket
-
 # Lights
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-impl \
