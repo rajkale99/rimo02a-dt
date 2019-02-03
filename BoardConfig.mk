@@ -50,9 +50,11 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x00000100
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 
 TARGET_KERNEL_ARCH := arm64
+TARGET_KERNEL_HEADER_ARCH := arm64
 
 TARGET_KERNEL_SOURCE := kernel/smartron/msm8976
-TARGET_KERNEL_CONFIG := rk_defconfig
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
+TARGET_KERNEL_CONFIG := lineageos_rimo02a_defconfig
 
 # APEX image
 DEXPREOPT_GENERATE_APEX_IMAGE := true
@@ -94,14 +96,9 @@ TARGET_USE_QTI_BT_STACK := true
 
 # Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
-USE_PROPRIETARY_CAMERA := false
 BOARD_QTI_CAMERA_32BIT_ONLY := true
-TARGET_USES_MEDIA_EXTENSIONS := true
+TARGET_COMPILE_WITH_MSM_KERNEL := true
 TARGET_USES_QTI_CAMERA_DEVICE := true
-
-# This is needed for us as it disables tcache, which is breaking camera.
-MALLOC_SVELTE := true
-BOARD_GLOBAL_CFLAGS += -DDECAY_TIME_DEFAULT=0
 
 # Charger
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
@@ -123,10 +120,6 @@ ifeq ($(HOST_OS),linux)
     WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := true
   endif
 endif
-
-# Camera
-TARGET_PROCESS_SDK_VERSION_OVERRIDE := \
-	/system/bin/mm-qcamera-daemon=23
 
 # Display
 TARGET_CONTINUOUS_SPLASH_ENABLED := true
@@ -220,21 +213,9 @@ TARGET_USES_OLD_MNC_FORMAT := true
 TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
 
 # Sepolicy
-include device/qcom/sepolicy-legacy-um/sepolicy.mk
-
-BOARD_SEPOLICY_VERS := 29.0
-BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
-
-# Shims
-TARGET_LD_SHIM_LIBS := \
-   /system/lib64/lib-imsvt.so|libshims_ims.so \
-   /system/bin/mm-qcamera-daemon|libshims_camera.so \
-   /system/lib64/hw/gxfingerprint.default.so|fakelogprint.so \
-   /system/lib64/hw/fingerprint.vendor.msm8952.so|fakelogprint.so \
-   /system/bin/gx_fpd|fakelogprint.so
+BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy-minimal
 
 # System As Root
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 BOARD_ROOT_EXTRA_FOLDERS := persist
 BOARD_ROOT_EXTRA_SYMLINKS := \
     /vendor/dsp:/dsp \
