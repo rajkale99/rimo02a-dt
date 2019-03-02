@@ -1,14 +1,14 @@
 [
   {
-    "repository": "android_vendor_smartron_rimo02a",
+    "repository": "platform_vendor_smartron_rimo02a",
     "target_path": "vendor/smartron/rimo02a"
   },
   {
-    "repository": "android_kernel_smartron_msm8976",
+    "repository": "platform_kernel_smartron_msm8976",
     "target_path": "kernel/smartron/msm8976"
   },
   {
-    "repository": "android_packages_resources_devicesettings",
+    "repository": "platform_packages_resources_devicesettings",
     "target_path": "packages/resources/devicesettings"
   }
 ]

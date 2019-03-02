@@ -1,1 +1,1 @@
-add_lunch_combo arrow_rimo02a-userdebug
+add_lunch_combo legion_rimo02a-userdebug
