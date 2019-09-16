@@ -33,6 +33,8 @@ PRODUCT_ENFORCE_RRO_TARGETS := \
 
 PRODUCT_DEXPREOPT_SPEED_APPS += SystemUI
 
+PRODUCT_PROPERTY_OVERRIDES += ro.control_privapp_permissions=log
+
 # Screen density
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 PRODUCT_AAPT_CONFIG := normal
