@@ -122,6 +122,12 @@ vendor.display.enable_default_color_mode=1
 vendor.display.perf_hint_window=50
 vendor.gralloc.enable_fb_ubwc=1
 
+# IMS - disable logging
+persist.ims.disableADBLogs=1
+persist.ims.disableDebugLogs=1
+persist.ims.disableIMSLogs=1
+persist.ims.disableQXDMLogs=1
+
 # Media
 av.debug.disable.pers.cache=1
 media.msm8956hw=1
