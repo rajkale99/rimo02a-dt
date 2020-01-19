@@ -28,9 +28,6 @@ DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
     vendor/arrow/overlay/CarrierConfig
 
-PRODUCT_ENFORCE_RRO_TARGETS := \
-    framework-res
-
 PRODUCT_DEXPREOPT_SPEED_APPS += SystemUI
 
 PRODUCT_PROPERTY_OVERRIDES += ro.control_privapp_permissions=log
