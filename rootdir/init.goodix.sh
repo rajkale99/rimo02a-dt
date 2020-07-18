@@ -1,5 +1,6 @@
-#!/vendor/bin/sh
-# Copyright (c) 2012-2013,2016,2018 The Linux Foundation. All rights reserved.
+#! /vendor/bin/sh
+
+# Copyright (c) 2009-2016, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -26,12 +27,6 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-export PATH=/vendor/bin
-
-boot_reason=`cat /proc/sys/kernel/boot_reason`
-reboot_reason=`getprop ro.boot.alarmboot`
-if [ "$boot_reason" = "3" ] || [ "$reboot_reason" = "true" ]; then
-    setprop ro.vendor.alarm_boot true
-else
-    setprop ro.vendor.alarm_boot false
+if [ ! -f /data/system/users/0/settings_fingerprint.xml ]; then
+    rm -rf /persist/data/gxfp/0_0
 fi

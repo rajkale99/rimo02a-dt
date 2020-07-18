@@ -26,28 +26,50 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
+# Read adj series and set adj threshold for PPR and ALMK.
+# This is required since adj values change from framework to framework.
+adj_series=`cat /sys/module/lowmemorykiller/parameters/adj`
+adj_1="${adj_series#*,}"
+set_almk_ppr_adj="${adj_1%%,*}"
+
+# PPR and ALMK should not act on HOME adj and below.
+# Normalized ADJ for HOME is 6. Hence multiply by 6
+# ADJ score represented as INT in LMK params, actual score can be in decimal
+# Hence add 6 considering a worst case of 0.9 conversion to INT (0.9*6).
+# For uLMK + Memcg, this will be set as 6 since adj is zero.
+set_almk_ppr_adj=$(((set_almk_ppr_adj * 6) + 6))
+echo $set_almk_ppr_adj > /sys/module/lowmemorykiller/parameters/adj_max_shift
+echo $set_almk_ppr_adj > /sys/module/process_reclaim/parameters/min_score_adj
+
 # Set Memory parameters.
 #
 # Set per_process_reclaim tuning parameters
 # All targets will use vmpressure range 50-70,
 # All targets will use 512 pages swap size.
 #
+# Set Low memory killer minfree parameters
+# 64 bit will use Google default LMK series.
+#
+# Set ALMK parameters (usually above the highest minfree values)
+# vmpressure_file_min threshold is always set slightly higher
+# than LMK minfree's last bin value for all targets. It is calculated as
+# vmpressure_file_min = (last bin - second last bin ) + last bin
+#
 # Set allocstall_threshold to 0 for all targets.
+
+echo "18432,23040,27648,32256,55296,80640" > /sys/module/lowmemorykiller/parameters/minfree
 
 echo 1 > /sys/module/process_reclaim/parameters/enable_process_reclaim
 echo 70 > /sys/module/process_reclaim/parameters/pressure_max
 echo 50 > /sys/module/process_reclaim/parameters/pressure_min
 echo 30 > /sys/module/process_reclaim/parameters/swap_opt_eff
-echo 1024 > /sys/module/process_reclaim/parameters/per_swap_size
+echo 0 >  /sys/module/lowmemorykiller/parameters/lmk_fast_run
+echo 512 > /sys/module/process_reclaim/parameters/per_swap_size
 echo 0 > /sys/module/vmpressure/parameters/allocstall_threshold
-echo 60 > /proc/sys/vm/swappiness
+echo 35  > /proc/sys/vm/swappiness
 
-panel=`cat /sys/class/graphics/fb0/modes`
-if [ "${panel:5:1}" == "x" ]; then
-    panel=${panel:2:3}
-else
-    panel=${panel:2:4}
-fi
+echo 81250 > /sys/module/lowmemorykiller/parameters/vmpressure_file_min
+echo 1 > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
 
 # Apply Scheduler and Governor settings for 8976
 # SoC IDs are 266, 274, 277, 278
@@ -97,7 +119,7 @@ echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
 echo 40000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
 echo 400000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 echo 59000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
-echo 806400 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
+echo 1190400 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
 echo "1 400000:60 691200:80" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
 
 # enable governor for perf cluster
@@ -110,9 +132,9 @@ echo 40000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
 echo 40000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/sampling_down_factor
 echo 400000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
 echo 60000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/max_freq_hysteresis
-echo 1113600 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
-echo "19000 1113600:39000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
-echo "85 1113600:90 1612800:80" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
+echo 1190400 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
+echo "19000 1190400:39000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
+echo "85 1190400:90 1382400:80" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
 
 # HMP Task packing settings for 8976
 echo 30 > /proc/sys/kernel/sched_small_task
@@ -143,6 +165,14 @@ echo 1 > /sys/module/lpm_levels/parameters/lpm_prediction
 # remove interaction lock when idle
 echo 100 > /sys/devices/virtual/graphics/fb0/idle_time
 
+if [ `cat /sys/devices/soc0/revision` == "1.0" ]; then
+# Disable l2-pc and l2-gdhs low power modes
+    echo N > /sys/module/lpm_levels/system/a53/a53-l2-gdhs/idle_enabled
+    echo N > /sys/module/lpm_levels/system/a72/a72-l2-gdhs/idle_enabled
+    echo N > /sys/module/lpm_levels/system/a53/a53-l2-pc/idle_enabled
+    echo N > /sys/module/lpm_levels/system/a72/a72-l2-pc/idle_enabled
+fi
+
 # Disable L2 GDHS on 8976
 echo N > /sys/module/lpm_levels/system/a53/a53-l2-gdhs/idle_enabled
 echo N > /sys/module/lpm_levels/system/a72/a72-l2-gdhs/idle_enabled
@@ -171,5 +201,3 @@ misc_link=$(ls -l /dev/block/bootdevice/by-name/misc)
 real_path=${misc_link##*>}
 setprop persist.vendor.mmi.misc_dev_path $real_path
 
-# Set BFQ as default io-schedular after boot
-setprop sys.io.scheduler "bfq"

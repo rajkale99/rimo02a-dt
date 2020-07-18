@@ -1,6 +1,8 @@
 /*
    Copyright (c) 2013-2016, The Linux Foundation. All rights reserved.
-   Copyright (c) 2020 LegionOS Project
+   Copyright (c) 2017-2018, The LineageOS Project
+   Copyright (c) 2020, LegionOS Project
+
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are
@@ -28,6 +30,12 @@
    IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <cstdlib>
+#include <unistd.h>
+#include <fcntl.h>
+#include <android-base/logging.h>
+#include <android-base/properties.h>
+
 #include "property_service.h"
 #include "vendor_init.h"
 
@@ -36,23 +44,7 @@
 
 #define DEVINFO_FILE "/dev/block/bootdevice/by-name/devinfo"
 
-void property_override(char const prop[], char const value[])
-{
-    prop_info *pi;
-
-    pi = (prop_info*) __system_property_find(prop);
-    if (pi)
-        __system_property_update(pi, value, strlen(value));
-    else
-        __system_property_add(prop, strlen(prop), value, strlen(value));
-}
-
-void property_override_triple(char const product_prop[], char const system_prop[], char const vendor_prop[], char const value[])
-{
-    property_override(product_prop, value);
-    property_override(system_prop, value);
-    property_override(vendor_prop, value);
-}
+using android::init::property_set;
 
 static int read_file2(const char *fname, char *data, int max_size)
 {
@@ -79,19 +71,19 @@ void vendor_load_properties() {
     // Default props
     if (read_file2(DEVINFO_FILE, device, sizeof(device)))
     {
-        if (!strncmp(device, "rimo02a_open", 7))
+        if (!strncmp(device, "s2_open", 7))
         {
             isX520 = 1;
         }
-        else if (!strncmp(device, "rimo02a_oversea", 10))
+        else if (!strncmp(device, "s2_oversea", 10))
         {
             isX522 = 1;
         }
-        else if (!strncmp(device, "rimo02a_india", 8))
+        else if (!strncmp(device, "s2_india", 8))
         {
             isX526 = 1;
         }
-        else if (!strncmp(device, "rimo02a_ww", 5))
+        else if (!strncmp(device, "s2_ww", 5))
         {
             isX527 = 1;
         }
@@ -100,26 +92,26 @@ void vendor_load_properties() {
     if (isX520)
     {
         // This is X520
-        property_override_triple("ro.product.model", "ro.product.system.model", "ro.product.vendor.model", "X520");
+        property_set("ro.product.model", "X520");
     }
     else if (isX522)
     {
         // This is X522
-        property_override_triple("ro.product.model", "ro.product.system.model", "ro.product.vendor.model", "X522");
+        property_set("ro.product.model", "X522");
     }
     else if (isX526)
     {
         // This is X526
-        property_override_triple("ro.product.model", "ro.product.system.model", "ro.product.vendor.model", "X526");
+        property_set("ro.product.model", "X526");
     }
     else if (isX527)
     {
         // This is X527
-        property_override_triple("ro.product.model", "ro.product.system.model", "ro.product.vendor.model", "X527");
+        property_set("ro.product.model", "X527");
     }
     else
     {
         // Unknown variant
-        property_override_triple("ro.product.model", "ro.product.system.model", "ro.product.vendor.model", "X52X");
+        property_set("ro.product.model", "SRT phone");
     }
 }
