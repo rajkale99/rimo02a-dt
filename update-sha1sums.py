@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Copyright (C) 2019 The ArrowOS Project
+# Copyright (C) 2020 LegionOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,8 +18,8 @@
 from hashlib import sha1
 import sys
 
-device='s2'
-vendor='leeco'
+device='rimo02a'
+vendor='smartron'
 
 lines = [ line for line in open('proprietary-files-qc.txt', 'r') ]
 vendorPath = '../../../vendor/' + vendor + '/' + device + '/proprietary'

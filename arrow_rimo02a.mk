@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2019 The LegionOS Project
+# Copyright (C) 2020 LegionOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,11 +12,19 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
 
-PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/aosp_rimo02a.mk
+# Inherit device configuration
+$(call inherit-product, device/smartron/rimo02a/full_rimo02a.mk)
 
-COMMON_LUNCH_CHOICES := \
-    aosp_rimo02a-user \
-    aosp_rimo02a-userdebug \
-    aosp_rimo02a-eng
+# Inherit some common LegionOS stuff.
+$(call inherit-product, vendor/aosp/config/common.mk)
+
+## Device identifier. This must come after all inclusions
+PRODUCT_DEVICE := rimo02a
+PRODUCT_NAME := aosp_rimo02a
+PRODUCT_BRAND := smartron
+TARGET DEVICE := rimo02a
+
+# Release name
+PRODUCT_RELEASE_NAME := rimo02a

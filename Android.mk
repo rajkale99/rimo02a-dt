@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2019 The ArrowOS Project
+# Copyright (C) 2019 The LegionOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifneq ($(filter s2, $(TARGET_DEVICE)),)
+ifneq ($(filter rimo02a, $(TARGET_DEVICE)),)
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
 include $(CLEAR_VARS)

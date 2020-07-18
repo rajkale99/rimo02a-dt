@@ -1,6 +1,6 @@
 /*
    Copyright (c) 2013-2016, The Linux Foundation. All rights reserved.
-   Copyright (c) 2017-2018, The LineageOS Project
+   Copyright (c) 2020 LegionOS Project
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are
@@ -79,19 +79,19 @@ void vendor_load_properties() {
     // Default props
     if (read_file2(DEVINFO_FILE, device, sizeof(device)))
     {
-        if (!strncmp(device, "s2_open", 7))
+        if (!strncmp(device, "rimo02a_open", 7))
         {
             isX520 = 1;
         }
-        else if (!strncmp(device, "s2_oversea", 10))
+        else if (!strncmp(device, "rimo02a_oversea", 10))
         {
             isX522 = 1;
         }
-        else if (!strncmp(device, "s2_india", 8))
+        else if (!strncmp(device, "rimo02a_india", 8))
         {
             isX526 = 1;
         }
-        else if (!strncmp(device, "s2_ww", 5))
+        else if (!strncmp(device, "rimo02a_ww", 5))
         {
             isX527 = 1;
         }

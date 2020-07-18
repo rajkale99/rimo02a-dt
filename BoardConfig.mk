@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2019 The ArrowOS Project
+# Copyright (C) 2019 The LegionOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-DEVICE_PATH := device/leeco/s2
+DEVICE_PATH := device/smartron/rimo02a
 
 # Headers
 TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
@@ -26,16 +26,13 @@ TARGET_BOARD_PLATFORM_GPU := qcom-adreno510
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
 TARGET_CPU_ABI := arm64-v8a
-TARGET_CPU_ABI2 :=
-TARGET_CPU_VARIANT := cortex-a53
+TARGET_CPU_VARIANT := generic
 
 TARGET_2ND_ARCH := arm
-TARGET_2ND_ARCH_VARIANT := armv8-a
+TARGET_2ND_ARCH_VARIANT := armv7-a-neon
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := cortex-a53.a57
-
-TARGET_CPU_CORTEX_A53 := true
+TARGET_2ND_CPU_VARIANT := cortex-a53
 
 TARGET_USES_64_BIT_BINDER := true
 
@@ -54,8 +51,8 @@ BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 
 TARGET_KERNEL_ARCH := arm64
 
-TARGET_KERNEL_SOURCE := kernel/leeco/msm8976
-TARGET_KERNEL_CONFIG := lineage_s2_defconfig
+TARGET_KERNEL_SOURCE := kernel/smartron/msm8976
+TARGET_KERNEL_CONFIG := rk_defconfig
 
 # APEX image
 DEXPREOPT_GENERATE_APEX_IMAGE := true
@@ -184,8 +181,8 @@ DEVICE_MATRIX_FILE   := $(DEVICE_PATH)/compatibility_matrix.xml
 
 # Init
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
-TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):libinit_s2
-TARGET_RECOVERY_DEVICE_MODULES := //$(DEVICE_PATH):libinit_s2
+TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):libinit_rimo02a
+TARGET_RECOVERY_DEVICE_MODULES := //$(DEVICE_PATH):libinit_rimo02a
 
 # IPA
 USE_DEVICE_SPECIFIC_DATA_IPA_CFG_MGR := true
@@ -262,8 +259,5 @@ TARGET_DISABLE_WCNSS_CONFIG_COPY	:= true
 TARGET_USES_WCNSS_MAC_ADDR_REV		:= true
 WIFI_HIDL_FEATURE_DISABLE_AP_MAC_RANDOMIZATION := true
 
-# OTA Assert
-TARGET_OTA_ASSERT_DEVICE := s2,le_s2,le_s2_ww
-
 # inherit from the proprietary version
--include vendor/leeco/s2/BoardConfigVendor.mk
+-include vendor/smartron/rimo02a/BoardConfigVendor.mk

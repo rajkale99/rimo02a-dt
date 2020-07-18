@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2019 The ArrowOS Project
+# Copyright (C) 2020 LegionOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,8 +17,8 @@
 
 set -e
 
-DEVICE=s2
-VENDOR=leeco
+DEVICE=rimo02a
+VENDOR=smartron
 
 # Load extract_utils and do some sanity checks
 MY_DIR="${BASH_SOURCE%/*}"

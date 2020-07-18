@@ -347,7 +347,7 @@ vendor/lib/libOmxWmaDec.so
 # msm_irqbalance - from sailfish - PPR2.181005.003
 vendor/bin/msm_irqbalance|3f7a923d9d01dbfda40ebdfdd27a62167df69c13
 
-# Offline charger - from s2 - EUi 5.9.028s
+# Offline charger - from rimo02a - EUi 5.9.028s
 vendor/bin/charger|a6ca35eff5ecc01b437e8cec2a53d7d5013d4f6e
 
 # Perf - from LA.UM.8.6.r1-01900-89xx.0

@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2019 The ArrowOS Project
+# Copyright (C) 2020 LegionOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_m.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # Get non-open-source specific aspects
-$(call inherit-product, vendor/leeco/s2/s2-vendor.mk)
+$(call inherit-product, vendor/smartron/rimo02a/rimo02a-vendor.mk)
 
 # Enable updating of APEXes
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
@@ -216,7 +216,7 @@ PRODUCT_COPY_FILES += \
 
 # Device specific settings
 PRODUCT_PACKAGES += \
-    LeEcoParts
+    smartronParts
 
 # Fake logprint for fingerprint libs
 PRODUCT_PACKAGES += \
@@ -253,7 +253,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/gpio-keys.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/gpio-keys.kl \
     $(LOCAL_PATH)/keylayout/msm8976-skun-snd-card_Button_Jack.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/msm8976-skun-snd-card_Button_Jack.kl \
     $(LOCAL_PATH)/keylayout/synaptics_dsx.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/synaptics_dsx.kl \
-    $(LOCAL_PATH)/keylayout/synaptics_dsx_s2.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/synaptics_dsx_s2.kl \
+    $(LOCAL_PATH)/keylayout/synaptics_dsx_rimo02a.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/synaptics_dsx_rimo02a.kl \
     $(LOCAL_PATH)/keylayout/synaptics_rmi4_i2c.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/synaptics_rmi4_i2c.kl
 
 # IMS
@@ -282,11 +282,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf \
     $(LOCAL_PATH)/configs/msm_irqbalance_little_big.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance_little_big.conf
 
-# LeEco Modules
+# smartron Modules
 PRODUCT_PACKAGES += \
     LePref
 
-# LeEco IR remote
+# smartron IR remote
 PRODUCT_PACKAGES += \
     LeRemote
 
@@ -369,7 +369,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     init.qcom.rc \
     init.target.rc \
-    init.s2.usb.rc \
+    init.rimo02a.usb.rc \
     ueventd.qcom.rc \
     init.safailnet.rc
 
