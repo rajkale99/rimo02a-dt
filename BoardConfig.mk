@@ -1,5 +1,6 @@
 #
-# Copyright (C) 2019 The LegionOS Project
+# Copyright (C) 2016 The CyanogenMod Project
+# Copyright (C) 2017 - 2018 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -35,6 +36,9 @@ TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a53
 
 TARGET_USES_64_BIT_BINDER := true
+BUILD_BROKEN_DUP_RULES := true
+ENABLE_CPUSETS := true
+ENABLE_SCHEDBOOST := true
 
 # Bootloader
 TARGET_NO_BOOTLOADER := true
@@ -42,18 +46,15 @@ TARGET_BOOTLOADER_BOARD_NAME := MSM8952
 
 # Kernel
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci earlyprintk loop.max_part=7
-BOARD_KERNEL_CMDLINE += skip_initramfs rootwait ro init=/init root=/dev/dm-0 dm=\"system none ro,0 1 android-verity /dev/mmcblk0p27\"
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE := 2048
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x00000100
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 
 TARGET_KERNEL_ARCH := arm64
-TARGET_KERNEL_HEADER_ARCH := arm64
 
 TARGET_KERNEL_SOURCE := kernel/smartron/msm8976
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 TARGET_KERNEL_CONFIG := lineageos_rimo02a_defconfig
 
 # APEX image
@@ -85,28 +86,37 @@ TARGET_USES_QCOM_MM_AUDIO := true
 BOARD_USES_ALSA_AUDIO := true
 BOARD_SUPPORTS_SOUND_TRIGGER := true
 
-USE_CUSTOM_AUDIO_POLICY := 1
+USE_CUSTOM_AUDIO_POLICY := 0
 USE_XML_AUDIO_POLICY_CONF := 1
 
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
+BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
+BLUETOOTH_HCI_USE_MCT := true
 QCOM_BT_USE_BTNV := true
-TARGET_USE_QTI_BT_STACK := true
+QCOM_BT_USE_SMD_TTY := true
+
+# This is needed for us as it disables tcache, which is breaking camera.
+#MALLOC_SVELTE := true
+#BOARD_GLOBAL_CFLAGS += -DDECAY_TIME_DEFAULT=0
 
 # Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
 BOARD_QTI_CAMERA_32BIT_ONLY := true
 TARGET_COMPILE_WITH_MSM_KERNEL := true
 TARGET_USES_QTI_CAMERA_DEVICE := true
+BOARD_USES_SNAPDRAGONCAMERA_VERSION := 2
+
+# Camera
+TARGET_PROCESS_SDK_VERSION_OVERRIDE := \
+	/system/vendor/bin/mm-qcamera-daemon=27
 
 # Charger
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
 BOARD_CHARGER_ENABLE_SUSPEND := true
-BOARD_HEALTHD_CUSTOM_CHARGER_RES := $(DEVICE_PATH)/charger/images
 BACKLIGHT_PATH := "/sys/class/leds/lcd-backlight/brightness"
 BLINK_PATH := "/sys/class/leds/red/blink"
-WITH_LINEAGE_CHARGER := false
 
 # CSVT
 TARGET_USES_CSVT := true
@@ -122,6 +132,7 @@ ifeq ($(HOST_OS),linux)
 endif
 
 # Display
+MAX_VIRTUAL_DISPLAY_DIMENSION := 2048
 TARGET_CONTINUOUS_SPLASH_ENABLED := true
 TARGET_USES_C2D_COMPOSITION := true
 TARGET_USES_ION := true
@@ -132,6 +143,8 @@ MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
 
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
+SF_VSYNC_EVENT_PHASE_OFFSET_NS := 6000000
+VSYNC_EVENT_PHASE_OFFSET_NS := 2000000
 
 # UI
 TARGET_ADDITIONAL_GRALLOC_10_USAGE_BITS := 0x02000000U
@@ -141,6 +154,8 @@ TARGET_ENABLE_MEDIADRM_64 := true
 
 # Encryption
 TARGET_HW_DISK_ENCRYPTION := true
+TARGET_LEGACY_HW_DISK_ENCRYPTION := true
+TARGET_KEYMASTER_SKIP_WAITING_FOR_QSEE := true
 
 # Exclude serif fonts for saving system.img size.
 EXCLUDE_SERIF_FONTS := true
@@ -152,8 +167,8 @@ TARGET_EXFAT_DRIVER := sdfat
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 4294967296
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 57033596416
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2684354560
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 26838785024
 BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_PERSISTIMAGE_PARTITION_SIZE := 33554432
@@ -180,9 +195,6 @@ TARGET_RECOVERY_DEVICE_MODULES := //$(DEVICE_PATH):libinit_rimo02a
 # IPA
 USE_DEVICE_SPECIFIC_DATA_IPA_CFG_MGR := true
 
-# Keymaster
-TARGET_PROVIDES_KEYMASTER := true
-
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
 
@@ -194,7 +206,6 @@ TARGET_PER_MGR_ENABLED := true
 
 # Power
 TARGET_RPM_SYSTEM_STAT := /d/rpm_stats
-TARGET_USES_INTERACTION_BOOST := true
 
 # Properties
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
@@ -209,16 +220,19 @@ OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 # Recovery
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
 TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USES_MKE2FS := true
 TARGET_USERIMAGES_USE_F2FS := true
 
 # RIL
-TARGET_USES_OLD_MNC_FORMAT := true
 TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
 
 # Sepolicy
 BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy-minimal
 
-# System As Root
+# Enable real time lockscreen charging current values
+BOARD_GLOBAL_CFLAGS += -DBATTERY_REAL_INFO
+
+# Root Directories & Symlinks
 BOARD_ROOT_EXTRA_FOLDERS := persist
 BOARD_ROOT_EXTRA_SYMLINKS := \
     /vendor/dsp:/dsp \
@@ -238,10 +252,11 @@ BOARD_WPA_SUPPLICANT_PRIVATE_LIB	:= lib_driver_cmd_$(BOARD_WLAN_DEVICE)
 WIFI_DRIVER_FW_PATH_AP			:= "ap"
 WIFI_DRIVER_FW_PATH_STA			:= "sta"
 WPA_SUPPLICANT_VERSION			:= VER_0_8_X
-PRODUCT_VENDOR_MOVE_ENABLED		:= true
-TARGET_DISABLE_WCNSS_CONFIG_COPY	:= true
 TARGET_USES_WCNSS_MAC_ADDR_REV		:= true
 WIFI_HIDL_FEATURE_DISABLE_AP_MAC_RANDOMIZATION := true
+
+# OTA Assert
+ TARGET_OTA_ASSERT_DEVICE := rimo02a, SRT phone
 
 # inherit from the proprietary version
 -include vendor/smartron/rimo02a/BoardConfigVendor.mk

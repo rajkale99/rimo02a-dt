@@ -1,4 +1,4 @@
-Copyright 2020 - egionOS Project
+Copyright 2017 - The LineageOS Project
 
 Device configuration for Smartron srt.phone [T5524]
 ===================================================

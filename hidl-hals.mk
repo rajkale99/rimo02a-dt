@@ -22,8 +22,6 @@ PRODUCT_PACKAGES += \
     android.hardware.audio@5.0-impl \
     android.hardware.audio.common@5.0 \
     android.hardware.audio.common@5.0-util \
-    android.hardware.audio.effect@2.0-impl \
-    android.hardware.audio.effect@2.0-service \
     android.hardware.audio.effect@5.0 \
     android.hardware.audio.effect@5.0-impl \
     android.hardware.soundtrigger@2.2-impl \
@@ -53,7 +51,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
     android.hardware.drm@1.0-service \
-    android.hardware.drm@1.2-service.clearkey
+    android.hardware.drm@1.2-service.clearkey \
+    android.hardware.drm@1.2-service.widevine
 
 # Gatekeeper
 PRODUCT_PACKAGES += \
@@ -72,7 +71,7 @@ PRODUCT_PACKAGES += \
 
 # HW crypto
 PRODUCT_PACKAGES += \
-    vendor.qti.hardware.cryptfshw@1.0-service-qti.qsee
+    vendor.qti.hardware.cryptfshw@1.0-service-dlsym-qti
 
 # Keymaster
 PRODUCT_PACKAGES += \
@@ -94,7 +93,6 @@ PRODUCT_PACKAGES += \
 # Power
 PRODUCT_PACKAGES += \
     android.hardware.power@1.2-service-qti \
-    android.hardware.power.stats@1.0-service.mock
 
 # RenderScript
 PRODUCT_PACKAGES += \
@@ -102,14 +100,13 @@ PRODUCT_PACKAGES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    android.hardware.sensors@1.0-impl \
-    android.hardware.sensors@1.0-service.s2
+    android.hardware.sensors@1.0-impl
 
 # Thermal
 PRODUCT_PACKAGES += \
     android.hardware.thermal@2.0-service.mock
 
-# USB
+# USB HAL
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service.basic
 
