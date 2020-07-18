@@ -26,5 +26,10 @@ PRODUCT_NAME := legion_rimo02a
 PRODUCT_BRAND := smartron
 TARGET DEVICE := rimo02a
 
+
+TARGET_BOOT_ANIMATION_RES := 1080
+DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
+PRODUCT_GMS_CLIENTID_BASE := android-smartron
+
 # Release name
 PRODUCT_RELEASE_NAME := rimo02a
