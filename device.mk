@@ -150,24 +150,14 @@ PRODUCT_PACKAGES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    Snap
-
-ifneq ($(USE_PROPRIETARY_CAMERA),true)
-PRODUCT_PACKAGES += \
+    Snap \
     camera.msm8952 \
-    libqomx_core \
-    libmmcamera_interface \
-    libmmjpeg_interface \
-    libgui_vendor \
+    SnapdragonCamera \
+    SnapdragonCamera2 \
     libmm-qcamera
-endif
 
 PRODUCT_COPY_FILES +=  \
     $(LOCAL_PATH)/configs/external_camera_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/external_camera_config.xml
-
-# Charger
-PRODUCT_PACKAGES += \
-    charger_res_images
 
 # Codec2 modules
 PRODUCT_PACKAGES += \
@@ -261,11 +251,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf \
     $(LOCAL_PATH)/configs/msm_irqbalance_little_big.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance_little_big.conf
-
-# Libshims
-PRODUCT_PACKAGES += \
-    libshims_camera \
-    libshims_ims
 
 # Lights
 PRODUCT_PACKAGES += \
