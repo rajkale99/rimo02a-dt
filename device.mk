@@ -25,8 +25,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += \
-    $(LOCAL_PATH)/overlay \
-    vendor/arrow/overlay/CarrierConfig
+    $(LOCAL_PATH)/overlay
 
 PRODUCT_DEXPREOPT_SPEED_APPS += SystemUI
 
@@ -205,10 +204,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/ad_calib.cfg:$(TARGET_COPY_OUT_SYSTEM)/etc/ad_calib.cfg
 
-# Device specific settings
-PRODUCT_PACKAGES += \
-    smartronParts
-
 # For android_filesystem_config.h
 PRODUCT_PACKAGES += \
      fs_config_files
@@ -262,10 +257,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf \
     $(LOCAL_PATH)/configs/msm_irqbalance_little_big.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance_little_big.conf
-
-# smartron IR remote
-PRODUCT_PACKAGES += \
-    LeRemote
 
 # Libshims
 PRODUCT_PACKAGES += \
