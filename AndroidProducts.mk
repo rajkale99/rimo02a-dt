@@ -14,9 +14,9 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/aosp_rimo02a.mk
+    $(LOCAL_DIR)/legion_rimo02a.mk
 
 COMMON_LUNCH_CHOICES := \
-    aosp_rimo02a-user \
-    aosp_rimo02a-userdebug \
-    aosp_rimo02a-eng
+    legion_rimo02a-user \
+    legion_rimo02a-userdebug \
+    legion_rimo02a-eng
