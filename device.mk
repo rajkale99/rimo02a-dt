@@ -243,7 +243,7 @@ PRODUCT_COPY_FILES += \
 
 # IMS
 PRODUCT_PACKAGES += \
-    ims-ext-common_system \
+    ims-ext-common \
     ims_ext_common.xml
 
 # Telephony
@@ -407,8 +407,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     telephony-ext
 
-PRODUCT_BOOT_JARS += telephony-ext \
-	ims-ext-common_system
+PRODUCT_BOOT_JARS += telephony-ext
 
 # TextClassifier smart selection model files
 PRODUCT_PACKAGES += \
